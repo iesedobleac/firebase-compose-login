@@ -1,8 +1,5 @@
-package com.isaacdelosreyes.firebaselogincompose
+package com.isaacdelosreyes.firebaselogincompose.ui.screens
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,25 +25,16 @@ import com.isaacdelosreyes.firebaselogincompose.components.LoginButton
 import com.isaacdelosreyes.firebaselogincompose.components.LoginInput
 import com.isaacdelosreyes.firebaselogincompose.ui.theme.Green
 import com.isaacdelosreyes.firebaselogincompose.ui.theme.Violet
-
-class LoginActivity : ComponentActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            LoginParentView()
-        }
-    }
-}
+import com.isaacdelosreyes.firebaselogincompose.ui.theme.White900
 
 @Composable
-fun LoginParentView() {
+fun LoginScreen(goToRegisterScreen: () -> Unit) {
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.BottomCenter
     ) {
         Image(
-            painter = painterResource(id = R.drawable.login_background),
+            painter = painterResource(id = com.isaacdelosreyes.firebaselogincompose.R.drawable.login_background),
             contentDescription = "Background del login",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -58,12 +46,12 @@ fun LoginParentView() {
             Surface(
                 Modifier
                     .fillMaxWidth()
-                    .height(370.dp)
+                    .height(IntrinsicSize.Min)
                     .clip(RoundedCornerShape(topStartPercent = 8, topEndPercent = 8))
                     .constrainAs(surface) {
                         bottom.linkTo(parent.bottom)
                     },
-                color = Color.White
+                color = White900
             ) {
                 Column(
                     Modifier.fillMaxSize(),
@@ -73,10 +61,14 @@ fun LoginParentView() {
                         text = "Iniciar sesión", style = TextStyle(
                             fontSize = 20.sp,
                             fontWeight = FontWeight.Bold
-                        ), modifier = Modifier.padding(start = 30.dp, top = 20.dp)
+                        ), modifier = Modifier.padding(start = 30.dp, top = 20.dp, bottom = 10.dp)
                     )
-                    LoginInput(textLabel = "Usuario", Icons.Default.Email, false)
-                    LoginInput(textLabel = "Contraseña", Icons.Rounded.Lock, true)
+                    LoginInput(textLabel = "Usuario", imageVector = Icons.Default.Email)
+                    LoginInput(
+                        textLabel = "Contraseña",
+                        imageVector = Icons.Rounded.Lock,
+                        isTypePassword = true
+                    )
                     LoginButton(
                         buttonTextValue = "Iniciar sesión",
                         paddingTopValue = 20.dp,
@@ -87,9 +79,10 @@ fun LoginParentView() {
                     LoginButton(
                         buttonTextValue = "Registrarme",
                         paddingTopValue = 5.dp,
+                        paddingBotValue = 20.dp,
                         buttonColor = Violet
                     ) {
-
+                        goToRegisterScreen()
                     }
                 }
             }
@@ -97,8 +90,10 @@ fun LoginParentView() {
     }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun DefaultPreview() {
-    LoginParentView()
+fun LoginScreenPreview() {
+    LoginScreen {
+        //no-op
+    }
 }

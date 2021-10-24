@@ -17,19 +17,24 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.isaacdelosreyes.firebaselogincompose.ui.theme.Green
 
 @Composable
 fun LoginButton(
     buttonTextValue: String,
     paddingTopValue: Dp,
+    paddingBotValue: Dp = 0.dp,
     buttonColor: Color,
     buttonClick: () -> Unit
 ) {
     Button(
         onClick = { buttonClick() },
         Modifier
-            .padding(top = paddingTopValue, start = 30.dp, end = 30.dp)
+            .padding(
+                top = paddingTopValue,
+                start = 30.dp,
+                end = 30.dp,
+                bottom = paddingBotValue
+            )
             .fillMaxWidth()
             .height(60.dp)
             .clip(RoundedCornerShape(50.dp)),
