@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Firebase Login Compose</string>
+    
+    <string name="password_value_empty">El campo de la contraseña no puede quedar vacío</string>
+    <string name="confirm_password_value_empty">El campo de confirmar contraseña no puede quedar vacío</string>
+    <string name="name_value_empty">El campo del nombre no puede quedar vacío</string>
+    <string name="surname_value_empty">El campo de los apellidos no puede quedar vacío</string>
+    <string name="email_value_empty">El campo del email no puede quedar vacío</string>
+    <string name="password_do_not_match">Las contraseñas no coinciden</string>
+
 </resources>

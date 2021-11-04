@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.isaacdelosreyes.firebaselogincompose.ui.screens.LoginScreen
-import com.isaacdelosreyes.firebaselogincompose.ui.screens.RegisterScreen
+import com.isaacdelosreyes.firebaselogincompose.ui.screens.loginscreen.LoginScreen
+import com.isaacdelosreyes.firebaselogincompose.ui.screens.registerscreen.RegisterScreen
 
 class MainActivity : ComponentActivity() {
 
