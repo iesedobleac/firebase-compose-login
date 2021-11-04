@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "33383659769",
+    "project_id": "fir-compose-f5568",
+    "storage_bucket": "fir-compose-f5568.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33383659769:android:5945fe772475ed7ef5ca28",
+        "android_client_info": {
+          "package_name": "com.isaacdelosreyes.firebaselogincompose"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33383659769-thc01qvr62lqgh36lap4i21que26d8mo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDE4q4SLcwgjBinoEPWU60ndRdsB-n3e4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33383659769-thc01qvr62lqgh36lap4i21que26d8mo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
