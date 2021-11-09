@@ -1,4 +1,4 @@
-package com.isaacdelosreyes.firebaselogincompose.ui.screens.registerscreen
+package com.isaacdelosreyes.firebaselogincompose.ui.screens.register
 
 import androidx.lifecycle.ViewModel
 
@@ -8,10 +8,11 @@ class RegisterViewModel(private val registerRepository: RegisterRepository) : Vi
         name: String,
         surname: String,
         email: String,
+        password: String,
         onSuccess: () -> Unit,
         onFailure: (String) -> Unit
     ) {
-        registerRepository.registerNewUser(name, surname, email, {
+        registerRepository.registerNewUser(name, surname, email, password, {
             onSuccess()
         }, {
             onFailure(it)
