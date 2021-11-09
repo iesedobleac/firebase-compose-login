@@ -1,7 +1,7 @@
-package com.isaacdelosreyes.firebaselogincompose.ui.screens.registerscreen
+package com.isaacdelosreyes.firebaselogincompose.ui.screens.register
 
-import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -41,6 +41,7 @@ fun RegisterScreen(goToLoginScreen: () -> Unit) {
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val confirmPassword = remember { mutableStateOf("") }
+    val showProgress = remember { mutableStateOf(false) }
 
     val nameValueEmpty = stringResource(id = R.string.name_value_empty)
     val surnameValueEmpty = stringResource(id = R.string.surname_value_empty)
@@ -52,10 +53,17 @@ fun RegisterScreen(goToLoginScreen: () -> Unit) {
     val snackBarHostState = SnackbarHostState()
     val scaffoldState = rememberScaffoldState()
     val scope = rememberCoroutineScope()
+    val viewModel = getViewModel<RegisterViewModel>()
 
-    Scaffold(scaffoldState = scaffoldState, modifier = Modifier.fillMaxSize()) {
+    Scaffold(
+        scaffoldState = scaffoldState,
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Transparent),
+    ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
             Image(
@@ -67,7 +75,6 @@ fun RegisterScreen(goToLoginScreen: () -> Unit) {
             ConstraintLayout {
 
                 val (surface, floatingButton) = createRefs()
-                val viewModel = getViewModel<RegisterViewModel>()
 
                 Surface(
                     Modifier
@@ -108,21 +115,31 @@ fun RegisterScreen(goToLoginScreen: () -> Unit) {
                             buttonTextValue = "Registrarme",
                             paddingTopValue = 20.dp,
                             paddingBotValue = 20.dp,
-                            buttonColor = Violet
+                            buttonColor = Violet,
+                            showProgress = showProgress.value
                         ) {
                             if (password.value.isNotEmpty()
                                 && confirmPassword.value.isNotEmpty()
                                 && password.value == confirmPassword.value
                             ) {
-                                viewModel.registerNewUser(name.value, surname.value, email.value, {
-                                    name.value = ""
-                                    surname.value = ""
-                                    email.value = ""
-                                    password.value = ""
-                                    confirmPassword.value = ""
-                                }, {
-                                    Log.e("Firebase", it)
-                                })
+                                showProgress.value = true
+                                viewModel.registerNewUser(
+                                    name.value,
+                                    surname.value,
+                                    email.value,
+                                    password.value,
+                                    {
+                                        name.value = ""
+                                        surname.value = ""
+                                        email.value = ""
+                                        password.value = ""
+                                        confirmPassword.value = ""
+                                        showProgress.value = false
+                                    },
+                                    {
+                                        showProgress.value = false
+                                        goToLoginScreen()
+                                    })
 
                             } else {
                                 scope.launch {

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,8 +24,9 @@ fun LoginButton(
     buttonTextValue: String,
     paddingTopValue: Dp,
     paddingBotValue: Dp = 0.dp,
+    showProgress: Boolean,
     buttonColor: Color,
-    buttonClick: () -> Unit
+    buttonClick: () -> Unit,
 ) {
     Button(
         onClick = { buttonClick() },
@@ -43,13 +45,20 @@ fun LoginButton(
         ),
         contentPadding = PaddingValues()
     ) {
-        Text(
-            text = buttonTextValue,
-            style = TextStyle(
-                color = Color.White,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold
+        if (showProgress) {
+            CircularIndeterminateProgressBar(
+                isDisplayed = showProgress
             )
-        )
+
+        } else {
+            Text(
+                text = buttonTextValue,
+                style = TextStyle(
+                    color = Color.White,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            )
+        }
     }
 }
